@@ -1,11 +1,18 @@
 import React from 'react';
-import './App.css';
+import styled from 'styled-components';
+import ResultsPage from './pages/ResultsPage';
+
+
+const AppContainer = styled.div`
+  height: 100%;
+  width: 100%;
+`;
 
 function App() {
   return (
-    <div className="App">
-      Hello there
-    </div>
+    <AppContainer>
+      <ResultsPage />
+    </AppContainer>
   );
 }
 
