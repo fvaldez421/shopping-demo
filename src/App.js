@@ -11,6 +11,7 @@ const AppContainer = styled.div`
 function App() {
   return (
     <AppContainer>
+      {/* Router and routes wouls usually go here */}
       <ResultsPage />
     </AppContainer>
   );
