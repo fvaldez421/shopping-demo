@@ -1,24 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
-import ItemCard from '../components/ItemCard';
+import { GridContainer } from '../../components/Grid';
+import ItemCard from './ItemCard';
 
 
 const PageWrapper = styled.div`
   padding: 40px 100px;
   @media only screen and (max-width: 599px) {
-    padding: 40px 40px;
+    padding: 40px;
   }
-  @media only screen and (max-width: 480px) {
+  @media only screen and (max-width: 420px) {
     padding: 40px 20px;
   }
 `;
 
-const CardsWrapper = styled.div`
+const CardsWrapper = styled(GridContainer)`
   max-width: 1020px;
   margin: auto;
-  display: grid;
-  grid-gap: 25px;
-  grid-template-columns: auto auto auto auto;
   @media only screen and (max-width: 1023px) {
     grid-template-columns: auto auto auto;
   }
@@ -34,7 +32,7 @@ const SearchResults = props => {
 
   return (
     <PageWrapper>
-      <CardsWrapper>
+      <CardsWrapper cols="4" gap="25px">
         <ItemCard />
         <ItemCard />
         <ItemCard />
