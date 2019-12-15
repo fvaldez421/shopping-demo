@@ -9,8 +9,11 @@ const PageWrapper = styled.div`
   @media only screen and (max-width: 599px) {
     padding: 40px;
   }
-  @media only screen and (max-width: 420px) {
+  @media only screen and (max-width: 480px) {
     padding: 40px 20px;
+  }
+  @media only screen and (max-width: 340px) {
+    padding: 30px 10px;
   }
 `;
 
@@ -21,10 +24,11 @@ const CardsWrapper = styled(GridContainer)`
     grid-template-columns: auto auto auto;
   }
   @media only screen and (max-width: 767px) {
+    grid-gap: 15px;
     grid-template-columns: auto auto;
   }
-  @media only screen and (max-width: 480px) {
-    grid-template-columns: auto;    
+  @media only screen and (max-width: 340px) {
+    grid-gap: 10px;
   }
 `;
 
@@ -32,7 +36,7 @@ const SearchResults = props => {
 
   return (
     <PageWrapper>
-      <CardsWrapper cols="4" gap="25px">
+      <CardsWrapper cols="4" gap="2vw">
         <ItemCard />
         <ItemCard />
         <ItemCard />
