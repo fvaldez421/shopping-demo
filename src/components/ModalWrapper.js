@@ -1,9 +1,9 @@
-import { appendAndRenderComponent } from '../utils/window';
+import { Portal } from '../utils/window';
 import React from 'react';
 import styled from 'styled-components';
 
 
-const ModalDialogue = styled.div`
+const ModalDialogue = styled(Portal)`
   position: fixed;
   top: 0;
   bottom: 0;
@@ -30,11 +30,11 @@ const ModalWrapper = ({ id='Modal', show, autoClose, onClose, children }) => {
 }
 
 
-appendAndRenderComponent({
-  type: 'div',
-  id: '',
-  className: 'modal-root',
-  component: ModalWrapper
-});
+// export default appendAndRenderComponent({
+//   type: 'div',
+//   id: '',
+//   className: 'modal-root',
+//   component: ModalWrapper
+// });
 
 export default ModalWrapper;

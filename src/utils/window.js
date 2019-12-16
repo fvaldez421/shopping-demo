@@ -1,4 +1,4 @@
-import ReactDOM from 'react-dom';
+import { createPortal } from 'react-dom';
 import React from 'react';
 
 /**
@@ -11,7 +11,7 @@ import React from 'react';
 export const appendToBody = (type='div', id='', className='') => {
   const childNode = document.createElement(type);
   childNode.setAttribute('id', id);
-  childNode.classList.add(className);
+  className.split(' ').forEach(cl => childNode.classList.add(cl));
   document.body.appendChild(childNode);
   return childNode;
 }
@@ -24,9 +24,10 @@ export const appendToBody = (type='div', id='', className='') => {
  * @param {String} [param0.className] optional element className
  * @param {Function} param0.component Required React Component to be rendered  
  */
-export const appendAndRenderComponent = ({ type='div', id='', className='', component: Component=null }) => {
-  if (!Component) throw new Error(`"component" attribute is required`);
+export const Portal = ({ type='div', id='none', className='none', children }) => {
+  if (!children) throw new Error(`"component" attribute is required`);
   const parentNode = appendToBody(type, id, className);
-  if (Component && parentNode) ReactDOM.render(<Component />, parentNode);
+  
+  return createPortal(<div>{children}</div>, parentNode);
 }
 
