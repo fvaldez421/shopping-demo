@@ -1,9 +1,9 @@
-import { Portal } from '../utils/window';
 import React from 'react';
 import styled from 'styled-components';
+import { Portal } from '../utils/window';
 
 
-const ModalDialogue = styled(Portal)`
+const ModalDialogue = styled.div`
   position: fixed;
   top: 0;
   bottom: 0;
@@ -13,28 +13,21 @@ const ModalDialogue = styled(Portal)`
   background-color: rgba(0,0,0,.5);
 `;
 
-const ModalWrapper = ({ id='Modal', show, autoClose, onClose, children }) => {
+const ModalWrapper = ({ id='Modal', show, autoClose, onClose, onOpen, children, ...props }) => {
   function handleBgClick() {
     if (autoClose) onClose();
   }
   return (
-    <>
+    <Portal id="ModalPortal" className="modal-parent">
       {show ?
-        <ModalDialogue id={id} show={true} onClick={handleBgClick}>
+        <ModalDialogue onClick={handleBgClick} {...props}>
           {show ? children : ''}
         </ModalDialogue>
         : ''
       }
-    </>
+    </Portal>
   )
 }
 
-
-// export default appendAndRenderComponent({
-//   type: 'div',
-//   id: '',
-//   className: 'modal-root',
-//   component: ModalWrapper
-// });
 
 export default ModalWrapper;

@@ -1,5 +1,4 @@
 import { createPortal } from 'react-dom';
-import React from 'react';
 
 /**
  * Appends a node into the document body and returns it
@@ -9,6 +8,8 @@ import React from 'react';
  * @return {HTMLElement}
  */
 export const appendToBody = (type='div', id='', className='') => {
+  const existingNode = document.getElementById(id);
+  if (existingNode) return existingNode;
   const childNode = document.createElement(type);
   childNode.setAttribute('id', id);
   className.split(' ').forEach(cl => childNode.classList.add(cl));
@@ -25,9 +26,8 @@ export const appendToBody = (type='div', id='', className='') => {
  * @param {Function} param0.component Required React Component to be rendered  
  */
 export const Portal = ({ type='div', id='none', className='none', children }) => {
-  if (!children) throw new Error(`"component" attribute is required`);
   const parentNode = appendToBody(type, id, className);
-  
-  return createPortal(<div>{children}</div>, parentNode);
+  if (parentNode) return createPortal(children, parentNode);
+  else throw new Error('Failed to mount parent node.')
 }
 
