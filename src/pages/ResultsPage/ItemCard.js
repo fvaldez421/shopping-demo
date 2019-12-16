@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { GridItem } from '../../components/Grid';
 import StarRating from '../../components/StarRating';
@@ -8,6 +8,7 @@ import { WishlistBtn } from '../../components/Buttons';
 
 const CardWrapper = styled(GridItem)`
   position: relative;
+  max-width: 230px;
   border-radius: 4px;
   border: 1px solid #000;
   min-height: 260px;
@@ -31,7 +32,7 @@ const ImageContainer = styled.div`
   position: relative;
   height: 170px;
   width: 100%;
-  background-color: lightblue;
+  background-color: lightgrey;
   > button{
     position: absolute;
     top: 50%;
@@ -93,28 +94,43 @@ const ItemActions = styled.div`
 `;
 
 const ItemCard = props => {
-  function addItemWishlist(e) {
-    const { target: { id } } = e;
-    console.log(id)
+  const {
+    id='',
+    name='',
+    price=null,
+    rating=null,
+    special=null,
+    imgs=["https://picsum.photos/id/891/200/300.jpg"],
+    wishlist={},
+    addToWishlist,
+    removeFromWishlist,
+  } = props;
+  const wishlisted = wishlist && !!wishlist[id];
+  const [currImage, updateImgIndex] = useState(0);
+  const addItemWishlist = () => {
+    if (wishlisted) removeFromWishlist({ id, name });
+    else addToWishlist({ id, name });
   }
   return (
     <CardWrapper>
-      <ItemDeal>
-        10% Off
-      </ItemDeal>
+      {special &&
+        <ItemDeal>
+          {special}
+        </ItemDeal>
+      }
       <ImageContainer>
-        <CardImage alt="Broken Item Image" imgUrl={"https://picsum.photos/id/891/200/300.jpg"} />
+        <CardImage alt="Broken Item Image" imgUrl={imgs[currImage]} />
         {/* <GalleryNavBtn toLeft={true} />
         <GalleryNavBtn toRight={true} /> */}
       </ ImageContainer>
       <CardContent>
-        <ItemLabel>Orren Ellis Chana 3-Light LED Kitchen Island Dome Pendant</ItemLabel>
-        <ItemPrice>$329</ItemPrice>
-        <ItemRating rating={4.2} />
+        <ItemLabel>{name}</ItemLabel>
+        <ItemPrice>{price ? `$${price}` : ''}</ItemPrice>
+        <ItemRating rating={rating} />
         <ItemActions>
           <WishlistBtn
-            id={'this item id'}
-            filled={false}
+            id={id}
+            filled={wishlisted}
             onClick={addItemWishlist}
           />
         </ItemActions>
