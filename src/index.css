@@ -1,5 +1,7 @@
 body {
+  position: relative;
   margin: 0;
+  background-color: #ccc;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -8,7 +10,5 @@ body {
 }
 
 #root {
-  height: 100vh;
-  overflow: auto;
-  background-color: #ccc;
+  min-height: 100vh;
 }
