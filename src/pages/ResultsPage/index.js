@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { GridContainer } from '../../components/Grid';
 import ItemCard from './ItemCard';
+import WishListMenu from './WishListMenu';
+import WishListModal from './WishListModal';
 
 
 const PageWrapper = styled.div`
@@ -33,6 +35,8 @@ const CardsWrapper = styled(GridContainer)`
 `;
 
 const SearchResults = props => {
+  const [showWishList, setWishListState] = useState(false);
+
 
   return (
     <PageWrapper>
@@ -47,6 +51,12 @@ const SearchResults = props => {
         <ItemCard />
         <ItemCard />
       </CardsWrapper>
+      <WishListMenu />
+      <WishListModal
+        show={showWishList}
+        onOpen={() => setWishListState(true)}
+        onClose={() => setWishListState(false)}
+      />
     </PageWrapper>
   )
 }
