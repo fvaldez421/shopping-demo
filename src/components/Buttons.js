@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { lightButtonGrey, hoverButtonGrey, activeButtonGrey } from './Colors';
+import { lightButtonGrey, hoverButtonGrey, activeButtonGrey, wishlistHeartActiveFilled, wishlistHeartHoverFilled } from './Colors';
 import AngleLeft from '../components/Icons/AngleLeft';
 import AngleRight from '../components/Icons/AngleRight';
-
+import Heart from '../components/Icons/Heart';
 
 export const BaseButton = styled.button`
   cursor: pointer;
@@ -13,6 +13,36 @@ export const BaseButton = styled.button`
     outline: none;
   }
 `;
+
+export const SvgBtnWrapper = styled(BaseButton)`
+  background-color: unset;
+  border: none;
+  /* The line below prevents picking up the svg and its children
+     if an event handler is fired */
+  > svg {
+    pointer-events: none;
+  }
+  &:hover {
+    > svg path {
+      fill: ${({ hoverColor='' }) => hoverColor};
+    }
+  }
+  &:active {
+    > svg path {
+      fill: ${({ activeColor='' }) => activeColor};
+    }
+  }
+`;
+
+export const WishlistBtn = ({ id='', filled=false, onClick }) => {
+  const hoverColor = filled ? wishlistHeartHoverFilled : hoverButtonGrey;
+  const activeColor = filled ? wishlistHeartActiveFilled : activeButtonGrey;
+  return (
+    <SvgBtnWrapper id={id} onClick={onClick} hoverColor={hoverColor} activeColor={activeColor}>
+      <Heart filled={filled} hoverColor="#000" />
+    </SvgBtnWrapper>
+  )
+}
 
 /**
  * Directional image navigation button
