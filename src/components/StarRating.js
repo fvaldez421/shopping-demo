@@ -51,13 +51,17 @@ const StarsRow = ({ filled = false }) => {
   )
 };
 
-const StarRating = ({ rating = 0 }) => {
+const StarRating = ({ rating=null }) => {
   return (
     <RatingWrapper>
-      <StarsRow />
-      <FillWrapper rating={rating}>
-        <StarsRow filled />
-      </FillWrapper>
+      {rating &&
+        <>
+          <StarsRow />
+          <FillWrapper rating={rating}>
+            <StarsRow filled />
+          </FillWrapper>
+        </>
+      }
     </RatingWrapper>
   );
 };
