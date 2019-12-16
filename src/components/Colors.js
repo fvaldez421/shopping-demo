@@ -4,4 +4,4 @@ export const activeButtonGrey = '#BBBBBB';
 export const wishlistHeartRed = '#ff0000';
 export const wishlistHeartHoverFilled = '#e00000';
 export const wishlistHeartActiveFilled = '#bf0000';
-
+export const wishlistNotificationBg = '#ffe39d';
