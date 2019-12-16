@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { GridItem } from '../../components/Grid';
 import StarRating from '../../components/StarRating';
+import { WishlistBtn } from '../../components/Buttons';
 // import { GalleryNavBtn } from '../../components/Buttons';
 
 
@@ -57,6 +58,9 @@ const CardImage = styled.div`
 const CardContent = styled.div`
   padding: 20px 15px;
   height: 160px;
+  > *:not(:last-child) {
+    margin-bottom: 20px;
+  }
 `;
 
 const ItemLabel = styled.p`
@@ -72,15 +76,27 @@ const ItemLabel = styled.p`
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical; 
 `;
+
 const ItemPrice = styled.p`
   font-size: 17px;
   font-weight: 700;
+  margin-bottom: 20px;
 `;
 const ItemRating = styled(StarRating)`
   position: relative;
 `;
+const ItemActions = styled.div`
+  > button {
+    display: inline-block;
+    float: right;
+  }
+`;
 
 const ItemCard = props => {
+  function addItemWishlist(e) {
+    const { target: { id } } = e;
+    console.log(id)
+  }
   return (
     <CardWrapper>
       <ItemDeal>
@@ -95,6 +111,13 @@ const ItemCard = props => {
         <ItemLabel>Orren Ellis Chana 3-Light LED Kitchen Island Dome Pendant</ItemLabel>
         <ItemPrice>$329</ItemPrice>
         <ItemRating rating={4.2} />
+        <ItemActions>
+          <WishlistBtn
+            id={'this item id'}
+            filled={false}
+            onClick={addItemWishlist}
+          />
+        </ItemActions>
       </ CardContent>
     </CardWrapper>
   )
