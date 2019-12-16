@@ -4,7 +4,6 @@ import ResultsPage from './pages/ResultsPage';
 
 
 const AppContainer = styled.div`
-  height: 100%;
   width: 100%;
 `;
 
