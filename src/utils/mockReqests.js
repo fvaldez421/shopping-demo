@@ -1,8 +1,33 @@
+/**
+ * Mock requests
+ * this file contains exports to mock and test the UI these exports
+ * replicate actual requests by using Promise functions and time outs
+ */
 import { getItem, setItem } from "./storage";
+import { items } from './mockData';
 
+/**
+ * @param {{}} [params] an object of params to be parsed and added to the end of the request
+ * @return {String} parsed params in the following format `?key=value&key=value`
+ */
+const paramsToString = (params=null) => {
+  const pList = [];
+  if (params) {
+    Object.entries(params).forEach(([ key, value ]) => {
+      pList.push(`${key}=${value}`);
+    });
+  }
+  return `?${pList.join('&')}`;
+}
 
+/**
+ * Mock get request returns different payloads depending on url provided
+ * @param {String} url the url for the request  
+ * @param {{}} params the key value pairs to be added to the url
+ * @return {Promise}`{ status, data }`
+ */
 export const get = async (url='', params={}) => {
-  return await new Promise((resolve, reject) => {
+  return await new Promise((resolve) => {
     let results = items;
     if (url === '/search/wishlist') results = getItem('wishlist') || {};
     setTimeout(() => {
@@ -11,13 +36,19 @@ export const get = async (url='', params={}) => {
   })
 };
 
+/**
+ * Mock post request can return different payloads depending on url provided
+ * @param {String} url the url for the request  
+ * @param {{}} body the post body to be sent
+ * @return {Promise}`{ status, data }`
+ */
 export const post = async (url='', body={}) => {
-  return await new Promise((resolve, reject) => {
+  return await new Promise((resolve) => {
     let results = {};
     if (url === '/wishlist') {
       const wishlist = getItem('wishlist') || {};
-      const { id, name } = body;
-      const updatedWishlist = { ...wishlist, [id]: name };
+      const { id, ...obj } = body;
+      const updatedWishlist = { ...wishlist, [id]: { id, ...obj } };
       setItem('wishlist', updatedWishlist);
       results = updatedWishlist;
     }
@@ -27,8 +58,14 @@ export const post = async (url='', body={}) => {
   })
 };
 
+/**
+ * Mock delete request returns different payloads depending on url provided
+ * @param {String} url the url for the request
+ * @param {Object} params the key value pairs to be added to the url
+ * @return {Promise}`{ status, data }`
+ */
 export const remove = async (url='', params={}) => {
-  return await new Promise((resolve, reject) => {
+  return await new Promise((resolve) => {
     let results = {};
     if (url === '/wishlist') {
       const wishlist = getItem('wishlist') || {};
@@ -42,68 +79,4 @@ export const remove = async (url='', params={}) => {
     }, 200);
   })
 };
-
-
-var items = [
-  {
-    id: 'uirehashwrthaershtwhtthhrt',
-    name: 'Orren Ellis Chana 3-Light LED Kitchen Island Dome Pendant',
-    rating: 4.3,
-    price: 330,
-    special: '10% off',
-    imgs: [],
-  },
-  {
-    id: 'ukhjtrsljtrwqthwhioghaerthhrt',
-    name: 'Orren Ellis Chana 2-Light LED Kitchen Island Dome Pendant',
-    rating: 2.6,
-    price: 180,
-    special: null,
-    imgs: [],
-  },
-  {
-    id: 'uirehashwrthewrtujyretgreyaerthhrt',
-    name: 'Orren Ellis Chana 3-Light LED Kitchen Island Dome Pendant',
-    rating: 3.6,
-    price: 600,
-    special: '15% off',
-    imgs: [],
-  },
-  {
-    id: 'ukhjtrsljtriyjerte6wt6uqwoghaerthhrt',
-    name: 'Orren Ellis Chana 5-Light LED Kitchen Island Dome Pendant',
-    rating: 1.8,
-    price: 321,
-    special: '$10 off',
-    imgs: [],
-  },
-  {
-    id: 'uirehashwrthewrtujywjjqwjjqwretgreyaerthhrt',
-    name: 'Orren Ellis Chana 8-Light LED Kitchen Island Dome Pendant',
-    rating: 3.3,
-    price: 340,
-    special: null,
-    imgs: [],
-  },
-  {
-    id: 'ukhjtrsljtrioghaejwthwthwjwthywherthhrt',
-    name: 'Orren Ellis Chana 7-Light LED Kitchen Island Dome Pendant',
-    rating: 4.3,
-    price: 230,
-    special: '$25 off',
-    imgs: [],
-  },
-  {
-    id: 'uirehashwrthewrtujyhwthretgreyaerthhrt',
-    name: 'Orren Ellis Chana 9-Light LED Kitchen Island Dome Pendant',
-    rating: 4.3,
-    price: 300,
-    special: null,
-    imgs: [],
-  }
-];
-
-
-
-
 

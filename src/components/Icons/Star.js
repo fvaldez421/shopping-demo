@@ -4,8 +4,9 @@ import { lightButtonGrey } from '../Colors';
 
 /**
  * We have to give svg's unique id's or things can get funky
- * @param {*} props.id - (required if using multiple if these) unique id in group
- * @param {*} props.role - (required if using multiple groups) unique role of grou[]
+ * @param {{ id: String, role: String, size: Number, filled: Boolean }} props 
+ * @param {String} [props.id]   (required if using multiple if these) unique id in group
+ * @param {String} [props.role] (required if using multiple groups) unique role of group
  */
 const Icon = ({ id = 'any', role = '', size=15, filled = false }) => {
   const fillColor = filled ? 'gold' : lightButtonGrey;

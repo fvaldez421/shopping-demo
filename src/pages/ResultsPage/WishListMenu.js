@@ -22,11 +22,16 @@ const MenuText = styled.p`
   user-select: none;
 `;
 
+
+/**
+ * Sticky Wishlist menu
+ * @param {{ status: String, wishlist: Object, openWishListModal: Function }} props 
+ */
 const WishListMenu = ({ status='initial', wishlist=null, openWishListModal }) => {
   const itemCount = wishlist ? Object.entries(wishlist).length : '';
   return (
-    <SnackBarContent show={true} onClick={openWishListModal}>
-      <MenuText>
+    <SnackBarContent show={true}>
+      <MenuText onClick={openWishListModal}>
         {status !== 'loaded' ?
           'Loading...'
           :

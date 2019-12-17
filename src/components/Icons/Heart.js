@@ -1,7 +1,12 @@
 import React from 'react';
 import { lightButtonGrey } from '../Colors';
 
-
+/**
+ * Heart SVG Icon
+ * @param {{ size: Number, filled: Boolean }} props
+ * @param {Number}  [props.size]   optional
+ * @param {Boolean} [props.filled] optional
+ */
 const Icon = ({ size=22, filled=false }) => {
   const fillColor = filled ? '#ff0000' : lightButtonGrey;
   const scaleRatio = Number(size) * 1.44 / 1000;

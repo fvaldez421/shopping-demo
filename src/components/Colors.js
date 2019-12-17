@@ -1,3 +1,7 @@
+/**
+ * This file contains all reuseable app colors
+ */
+
 export const lightButtonGrey = '#DDDDDD';
 export const hoverButtonGrey = '#CCCCCC';
 export const activeButtonGrey = '#BBBBBB';

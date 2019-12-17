@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 /**
- * 
+ * @param {{ cols: Number, colXWidth: String }} props
  * @param   {Number} props.cols        Number of base columns
  * @param   {String} [props.colXWidth] The width of each column
  * @returns {String} Formatted column widths

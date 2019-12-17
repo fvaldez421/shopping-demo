@@ -51,6 +51,11 @@ const StarsRow = ({ filled = false }) => {
   )
 };
 
+/**
+ * Reuseable 5-star rating component. Provided rating 
+ * must be a value from 0-5
+ * @param {{ rating: Number }} props
+ */
 const StarRating = ({ rating=null }) => {
   return (
     <RatingWrapper>

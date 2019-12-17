@@ -14,7 +14,7 @@ const SnackBarContainer = styled(Portal)`
 /**
  * Wrapper for adding Snackbar menus. This Wrapper can be used to add 
  * custom animations and styles to globally used menus
- * @param {*} param0 
+ * @param {{ show: Boolean, children: Function, ...rest: Object }} param0 
  */
 const SnackBarWrapper = ({ show, children, ...props }) => {
   return (
