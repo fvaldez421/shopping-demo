@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { GridItem } from '../../components/Grid';
 import StarRating from '../../components/StarRating';
 import { WishlistBtn } from '../../components/Buttons';
-// import { GalleryNavBtn } from '../../components/Buttons';
+import { GalleryNavBtn } from '../../components/Buttons';
 
 
 const CardWrapper = styled(GridItem)`
@@ -12,6 +12,7 @@ const CardWrapper = styled(GridItem)`
   border-radius: 4px;
   border: 1px solid #000;
   min-height: 260px;
+  overflow: hidden;
   background-color: #fff;
 `;
 
@@ -53,7 +54,7 @@ const CardImage = styled.div`
   min-width: 100%;
   background-size: cover;
   background-position: 50% 50%;
-  background-image: ${({ imgUrl='' }) => `url(${imgUrl})`};
+  background-image: ${({ imgUrl = '' }) => `url(${imgUrl})`};
 `;
 
 const CardContent = styled.div`
@@ -93,24 +94,40 @@ const ItemActions = styled.div`
   }
 `;
 
-const ItemCard = props => {
-  const {
-    id='',
-    name='',
-    price=null,
-    rating=null,
-    special=null,
-    imgs=["https://picsum.photos/id/891/200/300.jpg"],
-    wishlist={},
-    addToWishlist,
-    removeFromWishlist,
-  } = props;
+/**
+ * Reuseable Item Card component
+ */
+const ItemCard = ({
+  id = '',
+  name = '',
+  price = 0,
+  rating = 0,
+  special = '',
+  imgs = [],
+  wishlist = {},
+  addToWishlist,
+  removeFromWishlist,
+}) => {
+
   const wishlisted = wishlist && !!wishlist[id];
   const [currImage, updateImgIndex] = useState(0);
+  const nextImage = () => {
+    let index = currImage;
+    if (index === imgs.length - 1) index = 0;
+    else index++;
+    updateImgIndex(index);
+  }
+  const prevImage = () => {
+    let index = currImage;
+    if (index === 0) index = imgs.length - 1;
+    else index--;
+    updateImgIndex(index);
+  }
   const addItemWishlist = () => {
     if (wishlisted) removeFromWishlist({ id, name });
-    else addToWishlist({ id, name });
+    else addToWishlist({ id, name, price, imgs });
   }
+  const currImageUrl = imgs[currImage];
   return (
     <CardWrapper>
       {special &&
@@ -119,9 +136,9 @@ const ItemCard = props => {
         </ItemDeal>
       }
       <ImageContainer>
-        <CardImage alt="Broken Item Image" imgUrl={imgs[currImage]} />
-        {/* <GalleryNavBtn toLeft={true} />
-        <GalleryNavBtn toRight={true} /> */}
+        <CardImage alt="Broken Item Image" imgUrl={currImageUrl} />
+        <GalleryNavBtn toLeft={true} onClick={prevImage} />
+        <GalleryNavBtn toRight={true} onClick={nextImage} />
       </ ImageContainer>
       <CardContent>
         <ItemLabel>{name}</ItemLabel>
