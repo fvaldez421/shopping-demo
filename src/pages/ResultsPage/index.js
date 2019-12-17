@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-
 import { GridContainer } from '../../components/Grid';
 import ItemCard from './ItemCard';
 import WishListMenu from './WishListMenu';
@@ -38,7 +37,6 @@ const CardsWrapper = styled(GridContainer)`
 `;
 
 
-
 const initialState = {
   results: null,
   wishlist: null,
@@ -50,7 +48,6 @@ const SearchResults = props => {
   const { state, setState } = useCompound(initialState);
   const openWishListModal = () => setState({ showWishList: true });
   const closeWishListModal = () => setState({ showWishList: false });
-
   const {
     results,
     wishlist,
@@ -59,7 +56,7 @@ const SearchResults = props => {
     showWishList,
   } = state;
 
-  // we can dry this code up...
+  // loads the initial state - we can dry this code up...
   const updateSearchResults = async () => {
     setState({ resultStatus: 'loading' });
     const { data } = await get('/search/items', { query: '' });
@@ -78,6 +75,7 @@ const SearchResults = props => {
     const { data } = await remove('/wishlist', { ...body });
     if (data) setState({ wishlist: data });
   }
+
   if (resultStatus === 'initial') updateSearchResults();
   if (wishlistStatus === 'initial') updateWishlist();
   return (
@@ -97,9 +95,14 @@ const SearchResults = props => {
           )
         }
       </CardsWrapper>
-      <WishListMenu wishlist={wishlist} status={wishlistStatus} openWishListModal={openWishListModal} />
+      <WishListMenu
+        wishlist={wishlist}
+        status={wishlistStatus}
+        openWishListModal={openWishListModal}
+      />
       <WishListModal
         wishlist={wishlist}
+        status={wishlistStatus}
         show={showWishList}
         onOpen={openWishListModal}
         onClose={closeWishListModal}
