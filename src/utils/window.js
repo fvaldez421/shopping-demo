@@ -20,10 +20,10 @@ export const appendToBody = (type='div', id='', className='') => {
 /**
  * Appends an element to the document body and renders the provided `component`
  * @param {{ type: [String], id: [String], className: [String], children: Function }} props
- * @param {String} [param0.type] DOM element type, defaults to 'div' 
- * @param {String} [param0.id] element id
- * @param {String} [param0.className] element className
- * @param {Function} param0.component Required React Component to be rendered  
+ * @param {String} [props.type] DOM element type, defaults to 'div' 
+ * @param {String} [props.id] element id
+ * @param {String} [props.className] element className
+ * @param {Function} props.component Required React Component to be rendered  
  */
 export const Portal = ({ type='div', id='none', className='none', children }) => {
   const parentNode = appendToBody(type, id, className);
