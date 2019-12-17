@@ -21,7 +21,10 @@ The app required there to be modals and a menu stickied to the bottom of the win
 The app required some sort persistent of interaction with the data in the form of favoriting certain items. To get past this, mock requests were created using Promise functions and time outs to replicate the load time behind a request.
 
 #### Folder Structure:
-__components:__ This folder contains all reuseable components
+__components:__ This folder contains all reuseable components.
+
 __hooks:__ This folder contains react hooks helper components.
+
 __pages:__ This folder contains child folders containing an index.js which is the root of the page, and also contains all custom components belonging to that page.
+
 __utils:__ This folder contains utility files, this is really for common tools or miscellaneous files.
