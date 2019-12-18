@@ -21,10 +21,19 @@ The app required there to be modals and a menu stickied to the bottom of the win
 The app required some sort persistent of interaction with the data in the form of favoriting certain items. To get past this, mock requests were created using Promise functions and time outs to replicate the load time behind a request.
 
 #### Folder Structure:
-__components:__ This folder contains all reuseable components.
-
+__components:__ This folder contains all reuseable components
 __hooks:__ This folder contains react hooks helper components.
-
 __pages:__ This folder contains child folders containing an index.js which is the root of the page, and also contains all custom components belonging to that page.
-
 __utils:__ This folder contains utility files, this is really for common tools or miscellaneous files.
+
+#### Improvements:
+This project is missing tests! We should add unit tests as well as integration tests to confirm cross browser compatibility and that we don't break things when adding features or bug fixes.
+
+__React Component Tests:__
+We should test that our react components actually mount and then update when they receive props or when props are updated.
+
+__hooks tests:__
+We should check that our hooks components work if fed null or empty props and that they update and maintain their references.
+
+__utils tests:__
+We should test that our utilities function as they should. For example, that our localStorage it updated and read correctly and that our Portal helper components actually mount and render components in unique appended elements.
